@@ -36,6 +36,7 @@ class Feed extends React.Component {
   handleVoteSubmit(id, dir) {
     var updateList = this.state.masterPostList.slice();
     updateList[id].votes += dir;
+    updateList.sort((a,b) => b.votes - a.votes)
     this.setState({masterPostList: updateList});
 
   }
