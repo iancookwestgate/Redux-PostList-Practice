@@ -21,7 +21,7 @@ class NewPostControl extends React.Component {
   render() {
     let VisibleComponent = null;
     if (this.state.formVisibleOnPage) {
-      VisibleComponent = <NewPostForm onNewPostCreation = {this.props.onSubmitNewPost} />;
+      VisibleComponent = <NewPostForm onSubmitNewPost={this.handleSubmitNewPost} onNewPostCreation = {this.props.onSubmitNewPost} />;
     } else {
       VisibleComponent = <ConfirmNewPost onSubmitNewPost={this.handleSubmitNewPost} />;
     }

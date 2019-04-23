@@ -11,6 +11,7 @@ function NewPost(props){
   function handleSubmitNewPost(event) {
     event.preventDefault();
     props.onNewPostCreation({title: _title.value, user: _user.value, content: _content.value, votes: 0, id: v4(), timeOpen: new Moment()});
+    props.onSubmitNewPost();
     _title.value ='';
     _user.value ='';
     _content.value ='';

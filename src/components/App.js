@@ -12,7 +12,7 @@ function App() {
       <Head/>
       <Switch>
         <Route exact path='/' component={Body} />
-        <Route path='/newpost' render={()=><NewPostControl />}  />
+        // <Route path='/newpost' render={()=><NewPostControl />}  />
         <Route component={Error404} />
       </Switch>
     </div>

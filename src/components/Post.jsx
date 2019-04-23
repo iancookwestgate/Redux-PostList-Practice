@@ -1,6 +1,8 @@
 import React from 'react';
 import Moment from 'moment';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Vote from './Vote';
 
 function Post(props) {
 
@@ -11,16 +13,34 @@ function Post(props) {
     props.onVoteSubmit(props.id, -1);
   }
 
+  const PostStyle = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border: 2px solid rgb(30,30,30);
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+  `;
+
+  const ContentStyle = styled.div`
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  `;
+
   return (
-    <div id={props.id} className="Post">
-      <h1>{props.title}</h1>
-      <h5>{props.user}</h5>
-      <h3>{props.content}</h3>
-      <h5>{props.votes}</h5>
-      <h4>{props.formattedWaitTime} ago</h4>
-      <button onClick={upVote}>Vote Up</button>
-      <button onClick={downVote}>Vote Down</button>
-    </div>
+    <PostStyle id={props.id} className="Post">
+      <Vote upVote={upVote} downVote={downVote} votes={props.votes}/>
+      <ContentStyle>
+        <h6>Posted by {props.user} {props.formattedWaitTime} ago</h6>
+        <h1>{props.title}</h1>
+        <h3>{props.content}</h3>
+      </ContentStyle>
+    </PostStyle>
   );
 }
 
