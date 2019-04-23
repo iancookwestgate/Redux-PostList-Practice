@@ -12,17 +12,20 @@ class Feed extends React.Component {
           title: "First",
           user: "name",
           content: "First Content",
+          id: "03f8b32a-2a3f-43f6-abac-0b857ffec32d",
           votes: 0
         },
         {
           title: "Second",
           user: "name",
           content: "Second Content",
+          id: "03f8b32a-2a3f-43f6-abac-0b857ffec32e",
           votes: 0
         }
       ]
     }
     this.handleSubmitNewPost = this.handleSubmitNewPost.bind(this);
+    this.handleVoteSubmit = this.handleVoteSubmit.bind(this);
   }
   handleSubmitNewPost(newPost) {
     var newPostList = this.state.masterPostList.slice();
@@ -30,17 +33,26 @@ class Feed extends React.Component {
     this.setState({masterPostList: newPostList});
   }
 
-  
+  handleVoteSubmit(id) {
+    const masterPostList = { ...this.state.masterPostList };
+    masterPostList[id].votes += 1;
+    this.setState({masterPostList});
+    // this.state.masterPostList[id].votes += 1;
+
+    console.log(this.state)
+  }
 
   render() {
     return (
       <div className="Feed">
-        <NewPostControl postList={this.state.postList}  onSubmitNewPost={this.handleSubmitNewPost} />
+        <NewPostControl onSubmitNewPost={this.handleSubmitNewPost} />
         {this.state.masterPostList.map((post,index) =>
           <Post title={post.title}
             user={post.user}
             content={post.content}
             votes={post.votes}
+            id={index}
+            onVoteSubmit={this.handleVoteSubmit}
             key={post.id}/>
         )}
       </div>

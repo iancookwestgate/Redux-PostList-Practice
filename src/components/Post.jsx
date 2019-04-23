@@ -1,24 +1,22 @@
 import React from 'react';
 
-class Post extends React.Component {
+function Post(props) {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      votes: this.props.votes
-    }
+  function upVote() {
+    console.log(props.id)
+    props.onVoteSubmit(props.id);
+
   }
-  render() {
-    return (
-      <div className="Post">
-        <h1>{this.props.title}</h1>
-        <h5>{this.props.user}</h5>
-        <h3>{this.props.content}</h3>
-        <h5>{this.props.votes}</h5>
-        <button>Vote Up</button>
-      </div>
-    );
-  }
+
+  return (
+    <div id={props.id} className="Post">
+      <h1>{props.title}</h1>
+      <h5>{props.user}</h5>
+      <h3>{props.content}</h3>
+      <h5>{props.votes}</h5>
+      <button onClick={upVote}>Vote Up</button>
+    </div>
+  );
 }
 
 export default Post;

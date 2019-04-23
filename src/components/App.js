@@ -9,25 +9,7 @@ import Error404 from './Error404';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-      postList: [
-        {
-          title: 'three.js',
-          user: 'Mr.doob',
-          content: 'A JavaScript library which gives you the power to model 3D objects'
-        },
-        {
-          title: 'Future Goals',
-          user: 'Travis Toal',
-          content: 'I want to use three.js to model a solar system, and eventually the physics of a black hole.'
-        },
-        {
-          title: 'Resources / Inspirations',
-          user: 'oseiskar / Darryl Huffman',
-          content: 'Two projects which have functionality similar to what I want are <a href="https://oseiskar.github.io/black-hole/">oseiskars\'s</a> and <a href="https://codepen.io/darrylhuffman/details/gRZrpv">Darryl Huffman\'s</a> black hole sites.'
-        }
-      ]
-    };
+
     this.handleSubmitNewPost = this.handleSubmitNewPost.bind(this);
   }
 
@@ -43,7 +25,7 @@ class App extends React.Component {
         <Head/>
         <Switch>
           <Route exact path='/' component={Body} />
-          <Route path='/newpost' render={()=><NewPostControl postList={this.state.postList}  onSubmitNewPost={this.handleSubmitNewPost} />}  />
+          <Route path='/newpost' render={()=><NewPostControl />}  />
           <Route component={Error404} />
         </Switch>
       </div>
