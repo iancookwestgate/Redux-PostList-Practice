@@ -3,9 +3,10 @@ import React from 'react';
 function Post(props) {
 
   function upVote() {
-    console.log(props.id)
-    props.onVoteSubmit(props.id);
-
+    props.onVoteSubmit(props.id, 1);
+  }
+  function downVote() {
+    props.onVoteSubmit(props.id, -1);
   }
 
   return (
@@ -15,6 +16,7 @@ function Post(props) {
       <h3>{props.content}</h3>
       <h5>{props.votes}</h5>
       <button onClick={upVote}>Vote Up</button>
+      <button onClick={downVote}>Vote Down</button>
     </div>
   );
 }

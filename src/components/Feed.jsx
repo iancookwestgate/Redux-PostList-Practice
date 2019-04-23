@@ -33,13 +33,11 @@ class Feed extends React.Component {
     this.setState({masterPostList: newPostList});
   }
 
-  handleVoteSubmit(id) {
-    const masterPostList = { ...this.state.masterPostList };
-    masterPostList[id].votes += 1;
-    this.setState({masterPostList});
-    // this.state.masterPostList[id].votes += 1;
+  handleVoteSubmit(id, dir) {
+    var updateList = this.state.masterPostList.slice();
+    updateList[id].votes += dir;
+    this.setState({masterPostList: updateList});
 
-    console.log(this.state)
   }
 
   render() {
