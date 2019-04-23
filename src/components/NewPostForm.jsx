@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 } from 'uuid';
+import Moment from 'moment';
 
 function NewPost(props){
   let _title = null;
@@ -9,7 +10,7 @@ function NewPost(props){
 
   function handleSubmitNewPost(event) {
     event.preventDefault();
-    props.onNewPostCreation({title: _title.value, user: _user.value, content: _content.value, votes: 0, id: v4()});
+    props.onNewPostCreation({title: _title.value, user: _user.value, content: _content.value, votes: 0, id: v4(), timeOpen: new Moment()});
     _title.value ='';
     _user.value ='';
     _content.value ='';
