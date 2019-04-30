@@ -1,42 +1,15 @@
 import React from 'react';
 import Post from './Post';
-import { Link } from 'react-router-dom';
 import NewPostControl from './NewPostControl';
-import Moment from 'moment';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Feed extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      masterPostList: [
-        {
-          title: "First",
-          user: "name",
-          content: "First Content",
-          id: "03f8b32a-2a3f-43f6-abac-0b857ffec32d",
-          votes: 0,
-          formattedWaitTime: (new Moment()).fromNow(true),
-          timeOpen: new Moment()
-        },
-        {
-          title: "Second",
-          user: "name",
-          content: "Second Content",
-          id: "03f8b32a-2a3f-43f6-abac-0b857ffec32e",
-          votes: 0,
-          formattedWaitTime: (new Moment()).fromNow(true),
-          timeOpen: new Moment()
-        }
-      ]
     }
-    this.handleSubmitNewPost = this.handleSubmitNewPost.bind(this);
     this.handleVoteSubmit = this.handleVoteSubmit.bind(this);
-  }
-  handleSubmitNewPost(newPost) {
-    var newPostList = this.state.masterPostList.slice();
-    newPost.formattedWaitTime = (newPost.timeOpen).fromNow(true);
-    newPostList.push(newPost);
-    this.setState({masterPostList: newPostList});
   }
 
   componentDidMount() {
@@ -47,9 +20,9 @@ class Feed extends React.Component {
   }
 
   updateTicketElapsedWaitTime() {
-    let newMasterPostList = this.state.masterPostList.slice();
-    newMasterPostList.forEach((post) =>
-      post.formattedWaitTime = (post.timeOpen).fromNow(true)
+    let newMasterPostList = {...this.props.masterPostList};
+    Object.keys(newMasterPostList).forEach((post) =>
+      newMasterPostList[post].formattedWaitTime = (newMasterPostList[post].timeOpen).fromNow(true)
     );
     this.setState({masterPostList: newMasterPostList});
   }
@@ -58,31 +31,45 @@ class Feed extends React.Component {
     clearInterval(this.waitTimeUpdateTimer);
   }
 
-  handleVoteSubmit(id, dir) {
-    var updateList = this.state.masterPostList.slice();
-    updateList[id].votes += dir;
-    updateList.sort((a,b) => b.votes - a.votes)
-    this.setState({masterPostList: updateList});
-    console.log(this.state);
+  handleVoteSubmit(id, dir, votes) {
+    const { dispatch } = this.props;
+    const action = {
+      type: 'ADD_VOTE',
+      id: id,
+      dir: dir,
+      votes: votes
+    };
+    dispatch(action);
   }
 
   render() {
     return (
       <div className="Feed">
-        <NewPostControl onSubmitNewPost={this.handleSubmitNewPost} />
-        {this.state.masterPostList.map((post,index) =>
-          <Post title={post.title}
-            user={post.user}
-            content={post.content}
-            votes={post.votes}
-            id={index}
-            formattedWaitTime={post.formattedWaitTime}
+        <NewPostControl/>
+        {Object.keys(this.props.masterPostList).map((post,index) =>
+          <Post title={this.props.masterPostList[post].title}
+            user={this.props.masterPostList[post].user}
+            content={this.props.masterPostList[post].content}
+            votes={this.props.masterPostList[post].votes}
+            id={this.props.masterPostList[post].id}
+            formattedWaitTime={this.props.masterPostList[post].formattedWaitTime}
             onVoteSubmit={this.handleVoteSubmit}
-            key={post.id}/>
+            key={index}/>
         )}
       </div>
     );
   }
 }
 
-export default Feed;
+const mapStateToProps = state => {
+  return {
+    masterPostList: state.masterPostList,
+    votes: state.votes
+  }
+}
+
+Feed.propTypes = {
+  masterPostList: PropTypes.object
+}
+
+export default connect(mapStateToProps)(Feed);

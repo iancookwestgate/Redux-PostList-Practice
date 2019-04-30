@@ -1,5 +1,4 @@
 import React from 'react';
-import Moment from 'moment';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Vote from './Vote';
@@ -7,10 +6,10 @@ import Vote from './Vote';
 function Post(props) {
 
   function upVote() {
-    props.onVoteSubmit(props.id, 1);
+    props.onVoteSubmit(props.id, 1, props.votes);
   }
   function downVote() {
-    props.onVoteSubmit(props.id, -1);
+    props.onVoteSubmit(props.id, -1, props.votes);
   }
 
   const PostStyle = styled.div`
@@ -46,7 +45,7 @@ function Post(props) {
 
 Post.propTypes = {
   title: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   votes: PropTypes.number.isRequired,

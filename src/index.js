@@ -5,10 +5,10 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import { HashRouter } from 'react-router-dom';
 import { createStore } from 'redux';
-import postListReducer from './reducers/post-list-reducer';
+import rootReducer from './reducers/index';
 import { Provider } from 'react-redux';
 
-const store = createStore(postListReducer);
+const store = createStore(rootReducer);
 
 let unsubscribe = store.subscribe(() =>
   console.log(store.getState())

@@ -5,7 +5,7 @@ import SideBar from './SideBar';
 function Body() {
   return (
     <div className="Body">
-      <Feed />
+      <Feed/>
       <SideBar />
     </div>
   );

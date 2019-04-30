@@ -1,5 +1,4 @@
 import React from 'react';
-import Post from './Post';
 import NewPostForm from './NewPostForm';
 import ConfirmNewPost from './ConfirmNewPost';
 
@@ -21,7 +20,7 @@ class NewPostControl extends React.Component {
   render() {
     let VisibleComponent = null;
     if (this.state.formVisibleOnPage) {
-      VisibleComponent = <NewPostForm onSubmitNewPost={this.handleToggleForm} onNewPostCreation = {this.props.onSubmitNewPost} />;
+      VisibleComponent = <NewPostForm onSubmitNewPost={this.handleToggleForm} />;
     } else {
       VisibleComponent = <ConfirmNewPost onSubmitNewPost={this.handleToggleForm} />;
     }

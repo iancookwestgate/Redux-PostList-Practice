@@ -13,11 +13,12 @@ function NewPostForm(props){
     event.preventDefault();
     const action = {
       type: 'ADD_POST',
-      id: null,
+      id: v4(),
       title: _title.value,
       user: _user.value,
       content: _content.value,
       timeOpen: new Moment(),
+      formattedWaitTime: (new Moment()).fromNow(true),
       votes: 0
     };
     dispatch(action);
