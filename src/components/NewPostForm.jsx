@@ -1,16 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { v4 } from 'uuid';
 import Moment from 'moment';
+import { connect } from 'react-redux';
 
-function NewPost(props){
+function NewPostForm(props){
   let _title = null;
   let _user = null;
   let _content = null;
 
   function handleSubmitNewPost(event) {
+    const { dispatch } = props;
     event.preventDefault();
-    props.onNewPostCreation({title: _title.value, user: _user.value, content: _content.value, votes: 0, id: v4(), timeOpen: new Moment()});
+    const action = {
+      type: 'ADD_POST',
+      id: null,
+      title: _title.value,
+      user: _user.value,
+      content: _content.value,
+      timeOpen: new Moment(),
+      votes: 0
+    };
+    dispatch(action);
     props.onSubmitNewPost();
     _title.value ='';
     _user.value ='';
@@ -41,8 +51,4 @@ function NewPost(props){
   );
 }
 
-NewPost.propTypes = {
-  onNewPostCreation: PropTypes.func
-}
-
-export default NewPost;
+export default connect()(NewPostForm);

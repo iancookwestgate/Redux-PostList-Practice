@@ -9,22 +9,24 @@ class Feed extends React.Component {
     super();
     this.state = {
       masterPostList: [
-        // {
-        //   title: "First",
-        //   user: "name",
-        //   content: "First Content",
-        //   id: "03f8b32a-2a3f-43f6-abac-0b857ffec32d",
-        //   votes: 0,
-        //   timeOpen: new Moment()
-        // },
-        // {
-        //   title: "Second",
-        //   user: "name",
-        //   content: "Second Content",
-        //   id: "03f8b32a-2a3f-43f6-abac-0b857ffec32e",
-        //   votes: 0,
-        //   timeOpen: new Moment()
-        // }
+        {
+          title: "First",
+          user: "name",
+          content: "First Content",
+          id: "03f8b32a-2a3f-43f6-abac-0b857ffec32d",
+          votes: 0,
+          formattedWaitTime: (new Moment()).fromNow(true),
+          timeOpen: new Moment()
+        },
+        {
+          title: "Second",
+          user: "name",
+          content: "Second Content",
+          id: "03f8b32a-2a3f-43f6-abac-0b857ffec32e",
+          votes: 0,
+          formattedWaitTime: (new Moment()).fromNow(true),
+          timeOpen: new Moment()
+        }
       ]
     }
     this.handleSubmitNewPost = this.handleSubmitNewPost.bind(this);
@@ -61,6 +63,7 @@ class Feed extends React.Component {
     updateList[id].votes += dir;
     updateList.sort((a,b) => b.votes - a.votes)
     this.setState({masterPostList: updateList});
+    console.log(this.state);
   }
 
   render() {

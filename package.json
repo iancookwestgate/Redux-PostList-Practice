@@ -6,15 +6,17 @@
     "moment": "^2.18.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-redux": "^5.0.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
+    "redux": "^3.7.2",
     "styled-components": "^4.2.0",
     "uuid": "^3.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest; exit 0",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -31,5 +33,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-jest": "^20.0.3",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest": "^20.0.4"
   }
 }

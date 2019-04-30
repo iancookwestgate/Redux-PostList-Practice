@@ -9,10 +9,10 @@ class NewPostControl extends React.Component {
     this.state = {
       formVisibleOnPage: false
     };
-    this.handleSubmitNewPost = this.handleSubmitNewPost.bind(this);
+    this.handleToggleForm = this.handleToggleForm.bind(this);
   }
 
-  handleSubmitNewPost() {
+  handleToggleForm() {
     this.setState(prevState => ({
       formVisibleOnPage: !prevState.formVisibleOnPage
     }));
@@ -21,9 +21,9 @@ class NewPostControl extends React.Component {
   render() {
     let VisibleComponent = null;
     if (this.state.formVisibleOnPage) {
-      VisibleComponent = <NewPostForm onSubmitNewPost={this.handleSubmitNewPost} onNewPostCreation = {this.props.onSubmitNewPost} />;
+      VisibleComponent = <NewPostForm onSubmitNewPost={this.handleToggleForm} onNewPostCreation = {this.props.onSubmitNewPost} />;
     } else {
-      VisibleComponent = <ConfirmNewPost onSubmitNewPost={this.handleSubmitNewPost} />;
+      VisibleComponent = <ConfirmNewPost onSubmitNewPost={this.handleToggleForm} />;
     }
     return (
       <div>
